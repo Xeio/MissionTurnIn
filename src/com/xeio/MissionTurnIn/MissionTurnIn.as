@@ -62,20 +62,23 @@ class com.xeio.MissionTurnIn.MissionTurnIn
     
     function OnSignalMissionReportSent()
     {
-        var rewardList:Array = Quests.GetAllRewards();
         var listChanged:Boolean = false;
-        for (var i in rewardList)
+        if (!Key.isDown(Key.CONTROL))
         {
-            var reward = rewardList[i];
-
-            if (reward.m_OptionalRewards.length > 0) continue; //Don't auto-handle missions with an optional reward
-
-            var questId = reward.m_QuestTaskID;
-            
-            if (Utils.Contains(m_savedMissions, questId))
+            var rewardList:Array = Quests.GetAllRewards();
+            for (var i in rewardList)
             {
-                Quests.AcceptQuestReward(questId, 0);
-                listChanged = true;
+                var reward = rewardList[i];
+
+                if (reward.m_OptionalRewards.length > 0) continue; //Don't auto-handle missions with an optional reward
+
+                var questId = reward.m_QuestTaskID;
+                
+                if (Utils.Contains(m_savedMissions, questId))
+                {
+                    Quests.AcceptQuestReward(questId, 0);
+                    listChanged = true;
+                }
             }
         }
         
