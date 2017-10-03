@@ -39,6 +39,7 @@
     <compile path="src\xeio\HotkeyManager.as" />
     <compile path="src\com\xeio\HotkeyManager.as" />
     <compile path="src\com\xeio\MissionTurnIn\MissionTurnIn.as" />
+    <compile path="src\com\xeio\MissionTurnIn\HotkeyManager.as" />
   </compileTargets>
   <!-- Assets to embed into the output SWF -->
   <library>

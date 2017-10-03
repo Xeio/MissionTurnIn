@@ -30,6 +30,7 @@ class com.xeio.MissionTurnIn.MissionTurnIn
     {
         GUI.Mission.MissionSignals.SignalMissionReportSent.Connect(_root.missionrewardcontroller.SlotMissionReportSent, _root.missionrewardcontroller);
         GUI.Mission.MissionSignals.SignalMissionReportSent.Disconnect(OnSignalMissionReportSent, this);
+        com.GameInterface.Input.RegisterHotkey(148, "", _global.Enums.Hotkey.eHotkeyDown, 0);
     }
 	
     public function Activate(config: Archive)
@@ -58,12 +59,14 @@ class com.xeio.MissionTurnIn.MissionTurnIn
     {
         GUI.Mission.MissionSignals.SignalMissionReportSent.Disconnect(_root.missionrewardcontroller.SlotMissionReportSent, _root.missionrewardcontroller);
         GUI.Mission.MissionSignals.SignalMissionReportSent.Connect(OnSignalMissionReportSent, this);
+        com.xeio.MissionTurnIn.HotkeyManager.MissionTurnIn = this;
+        com.GameInterface.Input.RegisterHotkey(148, "com.xeio.MissionTurnIn.HotkeyManager.MissionReportHotkey", _global.Enums.Hotkey.eHotkeyDown, 0);
     }
     
     function OnSignalMissionReportSent()
     {
         var listChanged:Boolean = false;
-        if (!Key.isDown(Key.CONTROL))
+        if (!Key.isDown(Key.SHIFT))
         {
             var rewardList:Array = Quests.GetAllRewards();
             for (var i in rewardList)
@@ -95,7 +98,7 @@ class com.xeio.MissionTurnIn.MissionTurnIn
     
     function CallBaseMissionReportSent()
     {
-        _root.missionrewardcontroller.SlotMissionReportSent.apply(_root.missionrewardcontroller);
+        _root.missionrewardcontroller.SlotMissionReportSent(_root.missionrewardcontroller);
         
         setTimeout(Delegate.create(this, HookIntoCollectButton), 500);
     }
