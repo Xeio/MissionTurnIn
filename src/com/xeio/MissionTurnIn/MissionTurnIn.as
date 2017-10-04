@@ -59,7 +59,6 @@ class com.xeio.MissionTurnIn.MissionTurnIn
     {
         GUI.Mission.MissionSignals.SignalMissionReportSent.Disconnect(_root.missionrewardcontroller.SlotMissionReportSent, _root.missionrewardcontroller);
         GUI.Mission.MissionSignals.SignalMissionReportSent.Connect(OnSignalMissionReportSent, this);
-        com.xeio.MissionTurnIn.HotkeyManager.MissionTurnIn = this;
         com.GameInterface.Input.RegisterHotkey(148, "com.xeio.MissionTurnIn.HotkeyManager.MissionReportHotkey", _global.Enums.Hotkey.eHotkeyDown, 0);
     }
     
