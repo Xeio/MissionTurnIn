@@ -10,6 +10,7 @@ class com.xeio.MissionTurnIn.MissionTurnIn
     private var m_savedMissions: Array = [];
     
     private var MISSION_IDS: String = "MISSION_IDS";
+    private var MISSIONHOTKEY:Number = 129;
 
     public static function main(swfRoot:MovieClip):Void 
     {
@@ -30,7 +31,7 @@ class com.xeio.MissionTurnIn.MissionTurnIn
     {
         GUI.Mission.MissionSignals.SignalMissionReportSent.Connect(_root.missionrewardcontroller.SlotMissionReportSent, _root.missionrewardcontroller);
         GUI.Mission.MissionSignals.SignalMissionReportSent.Disconnect(OnSignalMissionReportSent, this);
-        com.GameInterface.Input.RegisterHotkey(148, "", _global.Enums.Hotkey.eHotkeyDown, 0);
+        //com.GameInterface.Input.RegisterHotkey(MISSIONHOTKEY, "", _global.Enums.Hotkey.eHotkeyDown, 0);
     }
 	
     public function Activate(config: Archive)
@@ -52,14 +53,14 @@ class com.xeio.MissionTurnIn.MissionTurnIn
     
     public function OnLoad()
     {		
-        setTimeout(Delegate.create(this, Initialize), 1000);
+        setTimeout(Delegate.create(this, Initialize), 500);
     }
     
     function Initialize()
     {
         GUI.Mission.MissionSignals.SignalMissionReportSent.Disconnect(_root.missionrewardcontroller.SlotMissionReportSent, _root.missionrewardcontroller);
         GUI.Mission.MissionSignals.SignalMissionReportSent.Connect(OnSignalMissionReportSent, this);
-        com.GameInterface.Input.RegisterHotkey(148, "com.xeio.MissionTurnIn.HotkeyManager.MissionReportHotkey", _global.Enums.Hotkey.eHotkeyDown, 0);
+        //com.GameInterface.Input.RegisterHotkey(MISSIONHOTKEY, "com.xeio.MissionTurnIn.HotkeyManager.MissionReportHotkey", _global.Enums.Hotkey.eHotkeyDown, 0);
     }
     
     function OnSignalMissionReportSent()
